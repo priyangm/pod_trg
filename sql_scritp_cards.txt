@@ -1,0 +1,57 @@
+CREATE TABLE customer
+(
+    customer_id integer NOT NULL,
+    customer_name varchar(20)  NOT NULL,
+    password varchar(20) ,
+    last_login date,
+    mobile_no integer,
+    email_id character  (50) ,
+    CONSTRAINT pk_custid PRIMARY KEY (customer_id)
+);
+
+
+CREATE TABLE card
+(
+  card_no bigint NOT NULL,
+  cvv int NOT NULL,
+  expiry_date date NOT NULL,
+  card_type varchar(10) NOT NULL,
+  customer_id int DEFAULT NULL,
+  card_company varchar(10) NOT NULL,
+  credit_limit double NULL,
+  card_status numeric(1,0) DEFAULT NULL,
+  CONSTRAINT pk_cardno PRIMARY KEY (card_no)      
+);
+
+CREATE TABLE cards_transaction
+(
+    sno numeric(16) NOT NULL,
+    tx_date date,
+    tx_type varchar(10),
+    tx_description varchar(250),
+    tx_value numeric(10, 2),
+    card_no numeric(16),
+    reward_points numeric(10),
+    PRIMARY KEY (sno)
+);
+
+
+
+
+
+INSERT INTO customer (customer_id, customer_name, password, last_login, mobile_no, email_id) VALUES
+(556677,	'Raja',	'capg123',	NULL,	NULL,	'raja@capgemini.com');
+
+INSERT INTO customer (customer_id, customer_name, password, last_login, mobile_no, email_id) VALUES
+(556678,	'Mahesh',	'capg123',	NULL,	NULL,	'mahesh@capgemini.com');
+
+
+
+INSERT INTO card (card_no, cvv, expiry_date, card_type, customer_id, card_company, credit_limit, card_status) VALUES
+(3624978443870993,	6502,	'2020-12-31',	'CREDIT',	556677,	'VISA',	250000.00,	1);
+
+
+INSERT INTO cards_transaction ( reward_points, tx_date, sno, tx_value, tx_description, tx_type, card_no) VALUES ( '10' , '2017-02-02' , '1' , '4500' , 'South India Shopping Mall'   , 'DR'   , '3624978443870993' );	
+INSERT INTO  cards_transaction ( tx_date, sno, tx_value, tx_description, tx_type, card_no) VALUES ( '2017-02-10' , '2' , '3000' , 'By Cash'   , 'CR'   , '3624978443870993' );	
+INSERT INTO  cards_transaction ( reward_points, tx_date, sno, tx_value, tx_description, tx_type, card_no) VALUES ( '10' , '2017-02-13' , '3' , '6000' , 'Toys World'   , 'DR'   , '3624978443870993' );	
+
